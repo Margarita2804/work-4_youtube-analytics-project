@@ -23,8 +23,8 @@ class Video:
         self.id = self.id_video
         self.title = video_response['items'][0]['snippet']['title']
         self.url = f"https://youtu.be/{self.id_video}"
-        self.view_count = video_response['items'][0]['statistics']['viewCount']
-        self.like_count = video_response['items'][0]['statistics']['likeCount']
+        self.view_count = int(video_response['items'][0]['statistics']['viewCount'])
+        self.like_count = int(video_response['items'][0]['statistics']['likeCount'])
 
 
 class PLVideo(Video):
