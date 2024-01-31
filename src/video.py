@@ -20,11 +20,18 @@ class Video:
     def info_video(self):
         video_response = self.get_service().videos().list(part='snippet,statistics,contentDetails,topicDetails',
                                                           id=self.id_video).execute()
-        self.id = self.id_video
-        self.title = video_response['items'][0]['snippet']['title']
-        self.url = f"https://youtu.be/{self.id_video}"
-        self.view_count = int(video_response['items'][0]['statistics']['viewCount'])
-        self.like_count = int(video_response['items'][0]['statistics']['likeCount'])
+        try:
+            self.id = self.id_video
+            self.title = video_response['items'][0]['snippet']['title']
+            self.url = f"https://youtu.be/{self.id_video}"
+            self.view_count = int(video_response['items'][0]['statistics']['viewCount'])
+            self.like_count = int(video_response['items'][0]['statistics']['likeCount'])
+        except IndexError:
+            self.id = self.id_video
+            self.title = None
+            self.url = None
+            self.view_count = None
+            self.like_count = None
 
 
 class PLVideo(Video):
